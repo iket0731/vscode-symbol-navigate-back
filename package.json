@@ -10,14 +10,14 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:goto-definition-history.helloWorld"
+    "onCommand:goto-definition-history.revealDefinition"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "goto-definition-history.helloWorld",
-        "title": "Hello World"
+        "command": "goto-definition-history.revealDefinition",
+        "title": "Goto Definition History: Go to Definition"
       }
     ]
   },
