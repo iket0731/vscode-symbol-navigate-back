@@ -10,7 +10,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:goto-definition-history.revealDefinition"
+    "onCommand:goto-definition-history.revealDefinition",
+    "onCommand:goto-definition-history.goBack"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -18,6 +19,10 @@
       {
         "command": "goto-definition-history.revealDefinition",
         "title": "Goto Definition History: Go to Definition"
+      },
+      {
+        "command": "goto-definition-history.goBack",
+        "title": "Goto Definition History: Go Back"
       }
     ]
   },
