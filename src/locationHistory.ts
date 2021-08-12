@@ -1,42 +1,42 @@
 import * as vscode from 'vscode';
 
 export class LocationHistory {
-	private locations: Location[] = [];
-	private currentIndex = 0;
+	private _locations: Location[] = [];
+	private _currentIndex = 0;
 
 	public add(location: Location) {
-		if (this.currentIndex < this.locations.length) {
-			this.locations.splice(this.currentIndex);
+		if (this._currentIndex < this._locations.length) {
+			this._locations.splice(this._currentIndex);
 		}
 
-		this.locations.push(location);
-		this.currentIndex++;
+		this._locations.push(location);
+		this._currentIndex++;
 	}
 
 	public goBack(): boolean {
-		if (this.currentIndex <= 0) {
+		if (this._currentIndex <= 0) {
 			return false;
 		}
 
-		this.currentIndex--;
+		this._currentIndex--;
 		return true;
 	}
 
 	public goForward(): boolean {
-		if (this.currentIndex >= this.locations.length - 1) {
+		if (this._currentIndex >= this._locations.length - 1) {
 			return false;
 		}
 
-		this.currentIndex++;
+		this._currentIndex++;
 		return true;
 	}
 
 	public get current(): Location | undefined {
-		if (this.currentIndex >= this.locations.length) {
+		if (this._currentIndex >= this._locations.length) {
 			return undefined;
 		}
 
-		return this.locations[this.currentIndex];
+		return this._locations[this._currentIndex];
 	}
 }
 

@@ -24,24 +24,24 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 class ExtensionCore {
-	private history = new LocationHistory();
+	private _history = new LocationHistory();
 
 	public async executeCommand(command: string) {
-		const loc = this.getCurrentLocation();
+		const loc = this._getCurrentLocation();
 		if (loc) {
-			this.history.add(loc);
+			this._history.add(loc);
 		}
 
 		await vscode.commands.executeCommand(command);
 
-		const newLoc = this.getCurrentLocation();
+		const newLoc = this._getCurrentLocation();
 		if (newLoc) {
-			this.history.add(newLoc);
-			this.history.goBack();
+			this._history.add(newLoc);
+			this._history.goBack();
 		}
 	}
 
-	private getCurrentLocation() {
+	private _getCurrentLocation() {
 		const editor = vscode.window.activeTextEditor;
 		if (!editor) {
 			return undefined
@@ -51,32 +51,32 @@ class ExtensionCore {
 	}
 
 	public async goBack() {
-		if (!this.history.goBack()) {
+		if (!this._history.goBack()) {
 			return;
 		}
 
-		const location = this.history.current;
+		const location = this._history.current;
 		if (!location) {
 			return;
 		}
 
-		await this.showInEditor(location);
+		await this._showInEditor(location);
 	}
 
 	public async goForward() {
-		if (!this.history.goForward()) {
+		if (!this._history.goForward()) {
 			return;
 		}
 
-		const location = this.history.current;
+		const location = this._history.current;
 		if (!location) {
 			return;
 		}
 
-		await this.showInEditor(location);
+		await this._showInEditor(location);
 	}
 
-	private async showInEditor(location: Location) {
+	private async _showInEditor(location: Location) {
 		const document = location.document;
 		const selection = new vscode.Selection(location.position, location.position);
 		const viewColumn = location.viewColumn;
