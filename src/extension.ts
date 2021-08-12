@@ -27,15 +27,12 @@ class ExtensionCore {
 	private _history = new LocationHistory();
 
 	public async executeCommand(command: string) {
-		const loc = this._getCurrentLocation();
-		if (loc) {
-			this._history.add(loc);
-		}
-
+		const oldLoc = this._getCurrentLocation();
 		await vscode.commands.executeCommand(command);
-
 		const newLoc = this._getCurrentLocation();
-		if (newLoc) {
+
+		if (oldLoc && newLoc && !oldLoc.equals(newLoc)) {
+			this._history.add(oldLoc);
 			this._history.add(newLoc);
 			this._history.goBack();
 		}

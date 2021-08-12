@@ -107,3 +107,21 @@ suite('LocationHistory', () => {
 		assert.strictEqual(false, ret);
 	});
 });
+
+suite('Location', () => {
+	test('equals', async () => {
+		const docA = await vscode.workspace.openTextDocument({ content: 'document A' });
+		const docB = await vscode.workspace.openTextDocument({ content: 'document B' });
+
+		const loc1 = new Location(docA, new vscode.Position(15, 26), vscode.ViewColumn.One);
+		const loc2 = new Location(docA, new vscode.Position(15, 26), vscode.ViewColumn.One);
+		const loc3 = new Location(docB, new vscode.Position(15, 26), vscode.ViewColumn.One);
+		const loc4 = new Location(docA, new vscode.Position(15, 27), vscode.ViewColumn.One);
+		const loc5 = new Location(docA, new vscode.Position(15, 26), vscode.ViewColumn.Two);
+
+		assert.strictEqual(true, loc1.equals(loc2));
+		assert.strictEqual(false, loc1.equals(loc3));
+		assert.strictEqual(false, loc1.equals(loc4));
+		assert.strictEqual(false, loc1.equals(loc5));
+	});
+});

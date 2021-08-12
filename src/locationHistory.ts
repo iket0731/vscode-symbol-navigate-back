@@ -50,4 +50,10 @@ export class Location {
 		this.position = position;
 		this.viewColumn = viewColumn;
 	}
+
+	public equals(other: Location): boolean {
+		return (this.document.fileName == other.document.fileName &&
+			this.position.compareTo(other.position) == 0 &&
+			this.viewColumn == other.viewColumn) ? true : false;
+	}
 }
