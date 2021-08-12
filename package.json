@@ -11,7 +11,8 @@
   ],
   "activationEvents": [
     "onCommand:goto-definition-history.revealDefinition",
-    "onCommand:goto-definition-history.goBack"
+    "onCommand:goto-definition-history.goBack",
+    "onCommand:goto-definition-history.goForward"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -23,6 +24,10 @@
       {
         "command": "goto-definition-history.goBack",
         "title": "Goto Definition History: Go Back"
+      },
+      {
+        "command": "goto-definition-history.goForward",
+        "title": "Goto Definition History: Go Forward"
       }
     ]
   },
