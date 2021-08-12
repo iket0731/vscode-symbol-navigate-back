@@ -22,13 +22,15 @@ class ExtensionCore {
 
 	public revealDefinition(editor: vscode.TextEditor) {
 		const location = new Location(editor.document, editor.selection.active, editor.viewColumn);
-		this.history.save(location);
+		this.history.add(location);
 
 		vscode.commands.executeCommand('editor.action.revealDefinition');
 	}
 
 	public goBack() {
-		this.history.undo();
+		if (!this.history.goBack()) {
+			return;
+		}
 
 		const location = this.history.current;
 		if (!location) {
