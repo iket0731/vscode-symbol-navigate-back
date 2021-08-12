@@ -6,7 +6,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(
 		vscode.commands.registerTextEditorCommand('goto-definition-history.revealDefinition', async (editor) => {
-			await core.revealDefinition(editor);
+			await core.executeCommand('editor.action.revealDefinition');
 		})
 	);
 
@@ -26,13 +26,13 @@ export function activate(context: vscode.ExtensionContext) {
 class ExtensionCore {
 	private history = new LocationHistory();
 
-	public async revealDefinition(editor: vscode.TextEditor) {
+	public async executeCommand(command: string) {
 		const loc = this.getCurrentLocation();
 		if (loc) {
 			this.history.add(loc);
 		}
 
-		await vscode.commands.executeCommand('editor.action.revealDefinition');
+		await vscode.commands.executeCommand(command);
 
 		const newLoc = this.getCurrentLocation();
 		if (newLoc) {
