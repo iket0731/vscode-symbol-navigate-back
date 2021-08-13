@@ -41,19 +41,19 @@ export class LocationHistory {
 }
 
 export class Location {
-	public readonly document: vscode.TextDocument;
+	public readonly uri: vscode.Uri;
 	public readonly position: vscode.Position;
 	public readonly viewColumn: vscode.ViewColumn | undefined;
 
-	constructor(document: vscode.TextDocument, position: vscode.Position, viewColumn: vscode.ViewColumn | undefined) {
-		this.document = document;
+	constructor(uri: vscode.Uri, position: vscode.Position, viewColumn: vscode.ViewColumn | undefined) {
+		this.uri = uri;
 		this.position = position;
 		this.viewColumn = viewColumn;
 	}
 
 	public equals(other: Location): boolean {
-		return (this.document.fileName == other.document.fileName &&
-			this.position.compareTo(other.position) == 0 &&
-			this.viewColumn == other.viewColumn) ? true : false;
+		return (this.uri.toString() === other.uri.toString() &&
+			this.position.compareTo(other.position) === 0 &&
+			this.viewColumn === other.viewColumn) ? true : false;
 	}
 }

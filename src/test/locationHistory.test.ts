@@ -8,15 +8,15 @@ suite('LocationHistory', () => {
 	let loc2: Location;
 	let loc3: Location;
 
-	setup(async () => {
+	setup(() => {
 		history = new LocationHistory();
 
-		const docA = await vscode.workspace.openTextDocument({ content: 'document A' });
-		const docB = await vscode.workspace.openTextDocument({ content: 'document B' });
+		const uriA = vscode.Uri.parse('file:///tmp/fileA');
+		const uriB = vscode.Uri.parse('file:///tmp/fileB');
 
-		loc1 = new Location(docA, new vscode.Position(15, 26), vscode.ViewColumn.One);
-		loc2 = new Location(docB, new vscode.Position(38, 1), vscode.ViewColumn.Two);
-		loc3 = new Location(docB, new vscode.Position(1, 27), vscode.ViewColumn.Two);
+		loc1 = new Location(uriA, new vscode.Position(15, 26), vscode.ViewColumn.One);
+		loc2 = new Location(uriB, new vscode.Position(38, 1), vscode.ViewColumn.Two);
+		loc3 = new Location(uriB, new vscode.Position(1, 27), vscode.ViewColumn.Two);
 	});
 
 	test('add', () => {
@@ -109,15 +109,15 @@ suite('LocationHistory', () => {
 });
 
 suite('Location', () => {
-	test('equals', async () => {
-		const docA = await vscode.workspace.openTextDocument({ content: 'document A' });
-		const docB = await vscode.workspace.openTextDocument({ content: 'document B' });
+	test('equals', () => {
+		const uriA = vscode.Uri.parse('file:///tmp/fileA');
+		const uriB = vscode.Uri.parse('file:///tmp/fileB');
 
-		const loc1 = new Location(docA, new vscode.Position(15, 26), vscode.ViewColumn.One);
-		const loc2 = new Location(docA, new vscode.Position(15, 26), vscode.ViewColumn.One);
-		const loc3 = new Location(docB, new vscode.Position(15, 26), vscode.ViewColumn.One);
-		const loc4 = new Location(docA, new vscode.Position(15, 27), vscode.ViewColumn.One);
-		const loc5 = new Location(docA, new vscode.Position(15, 26), vscode.ViewColumn.Two);
+		const loc1 = new Location(uriA, new vscode.Position(15, 26), vscode.ViewColumn.One);
+		const loc2 = new Location(uriA, new vscode.Position(15, 26), vscode.ViewColumn.One);
+		const loc3 = new Location(uriB, new vscode.Position(15, 26), vscode.ViewColumn.One);
+		const loc4 = new Location(uriA, new vscode.Position(15, 27), vscode.ViewColumn.One);
+		const loc5 = new Location(uriA, new vscode.Position(15, 26), vscode.ViewColumn.Two);
 
 		assert.strictEqual(true, loc1.equals(loc2));
 		assert.strictEqual(false, loc1.equals(loc3));

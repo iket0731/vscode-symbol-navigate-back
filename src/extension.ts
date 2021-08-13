@@ -73,7 +73,7 @@ class ExtensionCore {
 	}
 
 	private _getCurrentLocation(editor: vscode.TextEditor) {
-		return new Location(editor.document, editor.selection.active, editor.viewColumn);
+		return new Location(editor.document.uri, editor.selection.active, editor.viewColumn);
 	}
 
 	public async goBack() {
@@ -102,11 +102,10 @@ class ExtensionCore {
 		await this._showInEditor(loc);
 	}
 
-	private async _showInEditor(location: Location) {
-		const document = location.document;
-		const selection = new vscode.Selection(location.position, location.position);
-		const viewColumn = location.viewColumn;
-
-		await vscode.window.showTextDocument(document, { selection, viewColumn });
+	private async _showInEditor(loc: Location) {
+		await vscode.window.showTextDocument(loc.uri, {
+			selection: new vscode.Selection(loc.position, loc.position),
+			viewColumn: loc.viewColumn
+		});
 	}
 }
