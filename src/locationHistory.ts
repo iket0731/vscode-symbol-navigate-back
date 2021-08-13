@@ -9,8 +9,10 @@ export class LocationHistory {
 			this._locations.splice(this._currentIndex);
 		}
 
-		this._locations.push(location);
-		this._currentIndex++;
+		if (this._locations.length === 0 || !location.equals(this._locations[this._locations.length - 1])) {
+			this._locations.push(location);
+			this._currentIndex++;
+		}
 	}
 
 	public goBack(): boolean {
