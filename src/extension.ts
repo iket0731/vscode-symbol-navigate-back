@@ -11,6 +11,42 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 
 	context.subscriptions.push(
+		vscode.commands.registerTextEditorCommand('symbol-navigate-back.revealDefinitionAside', async (editor) => {
+			await core.navigate(editor, 'editor.action.revealDefinitionAside');
+		})
+	);
+
+	context.subscriptions.push(
+		vscode.commands.registerTextEditorCommand('symbol-navigate-back.revealDeclaration', async (editor) => {
+			await core.navigate(editor, 'editor.action.revealDeclaration');
+		})
+	);
+
+	context.subscriptions.push(
+		vscode.commands.registerTextEditorCommand('symbol-navigate-back.goToTypeDefinition', async (editor) => {
+			await core.navigate(editor, 'editor.action.goToTypeDefinition');
+		})
+	);
+
+	context.subscriptions.push(
+		vscode.commands.registerTextEditorCommand('symbol-navigate-back.goToImplementation', async (editor) => {
+			await core.navigate(editor, 'editor.action.goToImplementation');
+		})
+	);
+
+	context.subscriptions.push(
+		vscode.commands.registerTextEditorCommand('symbol-navigate-back.goToReferences', async (editor) => {
+			await core.navigate(editor, 'editor.action.goToReferences');
+		})
+	);
+
+	context.subscriptions.push(
+		vscode.commands.registerTextEditorCommand('symbol-navigate-back.showAllSymbols', async (editor) => {
+			await core.navigate(editor, 'workbench.action.showAllSymbols');
+		})
+	);
+
+	context.subscriptions.push(
 		vscode.commands.registerCommand('symbol-navigate-back.goBack', async () => {
 			await core.goBack();
 		})

@@ -11,6 +11,12 @@
   ],
   "activationEvents": [
     "onCommand:symbol-navigate-back.revealDefinition",
+    "onCommand:symbol-navigate-back.revealDefinitionAside",
+    "onCommand:symbol-navigate-back.revealDeclaration",
+    "onCommand:symbol-navigate-back.goToTypeDefinition",
+    "onCommand:symbol-navigate-back.goToImplementation",
+    "onCommand:symbol-navigate-back.goToReferences",
+    "onCommand:symbol-navigate-back.showAllSymbols",
     "onCommand:symbol-navigate-back.goBack",
     "onCommand:symbol-navigate-back.goForward"
   ],
@@ -20,6 +26,30 @@
       {
         "command": "symbol-navigate-back.revealDefinition",
         "title": "Symbol Navigate Back: Go to Definition"
+      },
+      {
+        "command": "symbol-navigate-back.revealDefinitionAside",
+        "title": "Symbol Navigate Back: Open Definition to the Side"
+      },
+      {
+        "command": "symbol-navigate-back.revealDeclaration",
+        "title": "Symbol Navigate Back: Go to Declaration"
+      },
+      {
+        "command": "symbol-navigate-back.goToTypeDefinition",
+        "title": "Symbol Navigate Back: Go to Type Definition"
+      },
+      {
+        "command": "symbol-navigate-back.goToImplementation",
+        "title": "Symbol Navigate Back: Go to Implementations"
+      },
+      {
+        "command": "symbol-navigate-back.goToReferences",
+        "title": "Symbol Navigate Back: Go to References"
+      },
+      {
+        "command": "symbol-navigate-back.showAllSymbols",
+        "title": "Symbol Navigate Back: Go to Symbol in Workspace..."
       },
       {
         "command": "symbol-navigate-back.goBack",
