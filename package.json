@@ -1,6 +1,6 @@
 {
-  "name": "goto-definition-history",
-  "displayName": "Goto Definition History",
+  "name": "symbol-navigate-back",
+  "displayName": "Symbol Navigate Back",
   "description": "",
   "version": "0.0.1",
   "engines": {
@@ -10,24 +10,24 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:goto-definition-history.revealDefinition",
-    "onCommand:goto-definition-history.goBack",
-    "onCommand:goto-definition-history.goForward"
+    "onCommand:symbol-navigate-back.revealDefinition",
+    "onCommand:symbol-navigate-back.goBack",
+    "onCommand:symbol-navigate-back.goForward"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "goto-definition-history.revealDefinition",
-        "title": "Goto Definition History: Go to Definition"
+        "command": "symbol-navigate-back.revealDefinition",
+        "title": "Symbol Navigate Back: Go to Definition"
       },
       {
-        "command": "goto-definition-history.goBack",
-        "title": "Goto Definition History: Go Back"
+        "command": "symbol-navigate-back.goBack",
+        "title": "Symbol Navigate Back: Go Back"
       },
       {
-        "command": "goto-definition-history.goForward",
-        "title": "Goto Definition History: Go Forward"
+        "command": "symbol-navigate-back.goForward",
+        "title": "Symbol Navigate Back: Go Forward"
       }
     ]
   },

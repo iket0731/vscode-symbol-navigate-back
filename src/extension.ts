@@ -5,19 +5,19 @@ export function activate(context: vscode.ExtensionContext) {
 	const core = new ExtensionCore();
 
 	context.subscriptions.push(
-		vscode.commands.registerTextEditorCommand('goto-definition-history.revealDefinition', async (editor) => {
+		vscode.commands.registerTextEditorCommand('symbol-navigate-back.revealDefinition', async (editor) => {
 			await core.executeCommand('editor.action.revealDefinition');
 		})
 	);
 
 	context.subscriptions.push(
-		vscode.commands.registerCommand('goto-definition-history.goBack', async () => {
+		vscode.commands.registerCommand('symbol-navigate-back.goBack', async () => {
 			await core.goBack();
 		})
 	);
 
 	context.subscriptions.push(
-		vscode.commands.registerCommand('goto-definition-history.goForward', async () => {
+		vscode.commands.registerCommand('symbol-navigate-back.goForward', async () => {
 			await core.goForward();
 		})
 	);
