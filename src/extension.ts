@@ -6,7 +6,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(
 		vscode.commands.registerTextEditorCommand('symbol-navigate-back.revealDefinition', async (editor) => {
-			await core.executeCommand('editor.action.revealDefinition');
+			await core.navigate(editor, 'editor.action.revealDefinition');
 		})
 	);
 
@@ -26,24 +26,17 @@ export function activate(context: vscode.ExtensionContext) {
 class ExtensionCore {
 	private _history = new LocationHistory();
 
-	public async executeCommand(command: string) {
-		const oldLoc = this._getCurrentLocation();
-		await vscode.commands.executeCommand(command);
-		const newLoc = this._getCurrentLocation();
-
-		if (oldLoc && newLoc && !oldLoc.equals(newLoc)) {
-			this._history.add(oldLoc);
-			this._history.add(newLoc);
-			this._history.goBack();
+	public async navigate(editor: vscode.TextEditor, command: string) {
+		const loc = this._getCurrentLocation(editor);
+		if (!loc) {
+			return;
 		}
+
+		this._history.add(loc);
+		await vscode.commands.executeCommand(command);
 	}
 
-	private _getCurrentLocation() {
-		const editor = vscode.window.activeTextEditor;
-		if (!editor) {
-			return undefined
-		}
-
+	private _getCurrentLocation(editor: vscode.TextEditor) {
 		return new Location(editor.document, editor.selection.active, editor.viewColumn);
 	}
 
@@ -52,12 +45,12 @@ class ExtensionCore {
 			return;
 		}
 
-		const location = this._history.current;
-		if (!location) {
+		const loc = this._history.current;
+		if (!loc) {
 			return;
 		}
 
-		await this._showInEditor(location);
+		await this._showInEditor(loc);
 	}
 
 	public async goForward() {
@@ -65,12 +58,12 @@ class ExtensionCore {
 			return;
 		}
 
-		const location = this._history.current;
-		if (!location) {
+		const loc = this._history.current;
+		if (!loc) {
 			return;
 		}
 
-		await this._showInEditor(location);
+		await this._showInEditor(loc);
 	}
 
 	private async _showInEditor(location: Location) {
