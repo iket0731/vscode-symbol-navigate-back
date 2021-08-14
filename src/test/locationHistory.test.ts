@@ -27,6 +27,21 @@ suite('LocationHistory', () => {
 		assert.strictEqual(undefined, history.current);
 	});
 
+	test('add - limit for the number of locations', () => {
+		for (let i = 0; i < 150; i++) {
+			const uri = vscode.Uri.parse('file:///tmp/fileA');
+			const loc = new Location(uri, i, vscode.ViewColumn.One);
+			history.add(loc);
+		}
+
+		assert.strictEqual(128, history.locations.length);
+		assert.strictEqual(22, history.locations[0].offset);
+		assert.strictEqual(23, history.locations[1].offset);
+		assert.strictEqual(148, history.locations[126].offset);
+		assert.strictEqual(149, history.locations[127].offset);
+		assert.strictEqual(128, history.currentIndex);
+	});
+
 	test('goBack', () => {
 		history.add(loc1);
 		history.add(loc2);
@@ -135,7 +150,7 @@ suite('LocationHistory', () => {
 		assert.strictEqual(15, history.locations[0].offset);
 		assert.strictEqual(24, history.locations[1].offset);
 		assert.strictEqual(1, history.locations[2].offset);
-		assert.strictEqual(loc3, history.current);
+		assert.strictEqual(2, history.currentIndex);
 	});
 
 	test('acceptDocumentChanges - case 2', () => {
@@ -159,7 +174,7 @@ suite('LocationHistory', () => {
 		assert.strictEqual(2, history.locations.length);
 		assert.strictEqual(loc1, history.locations[0]);
 		assert.strictEqual(loc3, history.locations[1]);
-		assert.strictEqual(loc3, history.current);
+		assert.strictEqual(1, history.currentIndex);
 	});
 });
 

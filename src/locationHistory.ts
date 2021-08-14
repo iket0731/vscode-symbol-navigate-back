@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 export class LocationHistory {
 	private _locations: Location[] = [];
 	private _currentIndex = 0;
+	private readonly _locationsLimit = 128;
 
 	public add(location: Location) {
 		if (this._currentIndex < this._locations.length) {
@@ -12,6 +13,12 @@ export class LocationHistory {
 		if (this._locations.length === 0 || !location.equals(this._locations[this._locations.length - 1])) {
 			this._locations.push(location);
 			this._currentIndex++;
+		}
+
+		// Ensure that the number of locations does not exceed the limit.
+		while (this._locations.length > this._locationsLimit) {
+			this._locations.shift();
+			this._currentIndex--;
 		}
 	}
 
@@ -33,6 +40,10 @@ export class LocationHistory {
 		return true;
 	}
 
+	public get locations(): readonly Location[] {
+		return this._locations;
+	}
+
 	public get current(): Location | undefined {
 		if (this._currentIndex >= this._locations.length) {
 			return undefined;
@@ -41,8 +52,8 @@ export class LocationHistory {
 		return this._locations[this._currentIndex];
 	}
 
-	public get locations(): readonly Location[] {
-		return this._locations;
+	public get currentIndex(): number {
+		return this._currentIndex;
 	}
 
 	public acceptDocumentChanges(uri: vscode.Uri, changes: readonly vscode.TextDocumentContentChangeEvent[]) {
