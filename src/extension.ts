@@ -57,6 +57,12 @@ export function activate(context: vscode.ExtensionContext) {
 			await core.goForward();
 		})
 	);
+
+	context.subscriptions.push(
+		vscode.workspace.onDidChangeTextDocument(event => {
+			core.handleDidChangeTextDocument(event);
+		})
+	);
 }
 
 class ExtensionCore {
@@ -73,7 +79,8 @@ class ExtensionCore {
 	}
 
 	private _getCurrentLocation(editor: vscode.TextEditor) {
-		return new Location(editor.document.uri, editor.selection.active, editor.viewColumn);
+		const offset = editor.document.offsetAt(editor.selection.active);
+		return new Location(editor.document.uri, offset, editor.viewColumn);
 	}
 
 	public async goBack() {
@@ -103,9 +110,15 @@ class ExtensionCore {
 	}
 
 	private async _showInEditor(loc: Location) {
-		await vscode.window.showTextDocument(loc.uri, {
-			selection: new vscode.Selection(loc.position, loc.position),
+		const doc = await vscode.workspace.openTextDocument(loc.uri);
+		const pos = doc.positionAt(loc.offset);
+		await vscode.window.showTextDocument(doc, {
+			selection: new vscode.Selection(pos, pos),
 			viewColumn: loc.viewColumn
 		});
+	}
+
+	public handleDidChangeTextDocument(event: vscode.TextDocumentChangeEvent) {
+		this._history.acceptDocumentChanges(event.document.uri, event.contentChanges);
 	}
 }

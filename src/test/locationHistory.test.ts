@@ -14,9 +14,9 @@ suite('LocationHistory', () => {
 		const uriA = vscode.Uri.parse('file:///tmp/fileA');
 		const uriB = vscode.Uri.parse('file:///tmp/fileB');
 
-		loc1 = new Location(uriA, new vscode.Position(15, 26), vscode.ViewColumn.One);
-		loc2 = new Location(uriB, new vscode.Position(38, 1), vscode.ViewColumn.Two);
-		loc3 = new Location(uriB, new vscode.Position(1, 27), vscode.ViewColumn.Two);
+		loc1 = new Location(uriA, 15, vscode.ViewColumn.One);
+		loc2 = new Location(uriB, 38, vscode.ViewColumn.Two);
+		loc3 = new Location(uriB, 1, vscode.ViewColumn.Two);
 	});
 
 	test('add', () => {
@@ -70,7 +70,7 @@ suite('LocationHistory', () => {
 		assert.strictEqual(loc3, history.current);
 	});
 
-	test('combination case 1', () => {
+	test('combination of add, goBack and goForward - case 1', () => {
 		history.add(loc1);
 		history.add(loc2);
 		history.goBack();
@@ -91,7 +91,7 @@ suite('LocationHistory', () => {
 		assert.strictEqual(loc1, history.current);
 	});
 
-	test('combination case 2', () => {
+	test('combination of add, goBack and goForward - case 2', () => {
 		history.add(loc1);
 		history.add(loc2);
 		history.goBack();
@@ -106,6 +106,61 @@ suite('LocationHistory', () => {
 		let ret = history.goBack();
 		assert.strictEqual(false, ret);
 	});
+
+	test('acceptDocumentChanges - case 1', () => {
+		history.add(loc1);
+		history.add(loc2);
+		history.add(loc3);
+		history.goBack();
+
+		const uri = loc2.uri;
+		const changes: vscode.TextDocumentContentChangeEvent[] = [
+			{
+				range: new vscode.Range(1, 1, 1, 1), // dummy value
+				rangeOffset: 5,
+				rangeLength: 10,
+				text: 'abc'
+			},
+			{
+				range: new vscode.Range(1, 1, 1, 1), // dummy value
+				rangeOffset: 25,
+				rangeLength: 10,
+				text: 'abc'
+			}
+		];
+
+		history.acceptDocumentChanges(uri, changes);
+
+		assert.strictEqual(3, history.locations.length);
+		assert.strictEqual(15, history.locations[0].offset);
+		assert.strictEqual(24, history.locations[1].offset);
+		assert.strictEqual(1, history.locations[2].offset);
+		assert.strictEqual(loc3, history.current);
+	});
+
+	test('acceptDocumentChanges - case 2', () => {
+		history.add(loc1);
+		history.add(loc2);
+		history.add(loc3);
+		history.goBack();
+
+		const uri = loc2.uri;
+		const changes: vscode.TextDocumentContentChangeEvent[] = [
+			{
+				range: new vscode.Range(1, 1, 1, 1), // dummy value
+				rangeOffset: 30,
+				rangeLength: 10,
+				text: 'abc'
+			}
+		];
+
+		history.acceptDocumentChanges(uri, changes);
+
+		assert.strictEqual(2, history.locations.length);
+		assert.strictEqual(loc1, history.locations[0]);
+		assert.strictEqual(loc3, history.locations[1]);
+		assert.strictEqual(loc3, history.current);
+	});
 });
 
 suite('Location', () => {
@@ -113,11 +168,11 @@ suite('Location', () => {
 		const uriA = vscode.Uri.parse('file:///tmp/fileA');
 		const uriB = vscode.Uri.parse('file:///tmp/fileB');
 
-		const loc1 = new Location(uriA, new vscode.Position(15, 26), vscode.ViewColumn.One);
-		const loc2 = new Location(uriA, new vscode.Position(15, 26), vscode.ViewColumn.One);
-		const loc3 = new Location(uriB, new vscode.Position(15, 26), vscode.ViewColumn.One);
-		const loc4 = new Location(uriA, new vscode.Position(15, 27), vscode.ViewColumn.One);
-		const loc5 = new Location(uriA, new vscode.Position(15, 26), vscode.ViewColumn.Two);
+		const loc1 = new Location(uriA, 26, vscode.ViewColumn.One);
+		const loc2 = new Location(uriA, 26, vscode.ViewColumn.One);
+		const loc3 = new Location(uriB, 26, vscode.ViewColumn.One);
+		const loc4 = new Location(uriA, 27, vscode.ViewColumn.One);
+		const loc5 = new Location(uriA, 26, vscode.ViewColumn.Two);
 
 		assert.strictEqual(true, loc1.equals(loc2));
 		assert.strictEqual(false, loc1.equals(loc3));
