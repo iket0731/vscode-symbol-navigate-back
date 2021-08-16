@@ -2,7 +2,7 @@
   "name": "symbol-navigate-back",
   "displayName": "Symbol Navigate Back",
   "description": "Jump back from \"Go to Definition\", \"Go to Declaration\", \"Go to Implementation\", etc",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "publisher": "iket0731",
   "author": {
     "name": "iket0731"
