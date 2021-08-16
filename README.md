@@ -6,6 +6,10 @@ The alternative commands save the current cursor position (add it to the stack) 
 
 You can also the use built-in `Go Back` (default key binding: `Alt+LeftArrow`) to return to the original position. However, depending on cursor move operations at the jump destination (Searching, scrolling by `PageUp` / `PageDown`, etc), the cursor position will be added to the history, so you may need to `Go Back` many times.
 
+## Screencast
+Go to definition, PageDown several times, and then go back:
+![`Go to Definition` and `Go Back`](symbol-navigate-back.gif)
+
 ## Features
 This extension contributes the following commands. Please assign keyboard shortcuts to these commands and use them.
 
@@ -20,7 +24,3 @@ This extension contributes the following commands. Please assign keyboard shortc
 |`Symbol Navigate Back: Go to Symbol in Workspace...` |Save the current cursor position and call built-in `Go to Symbol in Workspace...`
 |`Symbol Navigate Back: Go Back` |Jump back to the previously saved cursor position|
 |`Symbol Navigate Back: Go Forward` |Jump forward to the next cursor position in this extension's stack|
-
-## Examples
-Go to definition, PageDown four times, and then go back:
-![`Go to Definition` and `Go Back`](symbol-navigate-back.gif)
