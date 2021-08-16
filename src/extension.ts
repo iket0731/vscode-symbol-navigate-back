@@ -112,10 +112,10 @@ class ExtensionCore {
 	private async _showInEditor(loc: Location) {
 		const doc = await vscode.workspace.openTextDocument(loc.uri);
 		const pos = doc.positionAt(loc.offset);
-		await vscode.window.showTextDocument(doc, {
-			selection: new vscode.Selection(pos, pos),
-			viewColumn: loc.viewColumn
-		});
+		const editor = await vscode.window.showTextDocument(doc, { viewColumn: loc.viewColumn });
+
+		editor.selection = new vscode.Selection(pos, pos);
+		editor.revealRange(new vscode.Range(pos, pos), vscode.TextEditorRevealType.InCenterIfOutsideViewport);
 	}
 
 	public handleDidChangeTextDocument(event: vscode.TextDocumentChangeEvent) {
