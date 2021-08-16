@@ -57,35 +57,25 @@ export class LocationHistory {
 	}
 
 	public acceptDocumentChanges(uri: vscode.Uri, changes: readonly vscode.TextDocumentContentChangeEvent[]) {
-		for (let i = this._locations.length - 1; i >= 0; i--) {
-			const loc = this._locations[i];
+		for (const loc of this._locations) {
 			let delta = 0;
-			let removed = false;
 
 			for (const change of changes) {
 				if (loc.uri.toString() !== uri.toString()) {
 					continue;
 				}
 
+				// Move the location to match the change.
 				if (loc.offset >= change.rangeOffset + change.rangeLength) {
-					// Move the location to match the change.
 					delta += change.text.length - change.rangeLength;
 				} else if (loc.offset >= change.rangeOffset) {
-					// Remove the location.
-					this._locations.splice(i, 1);
-					removed = true;
-
-					if (this._currentIndex >= i) {
-						this._currentIndex--;
+					if (loc.offset > change.rangeOffset + change.text.length) {
+						delta = change.rangeOffset + change.text.length - loc.offset;
 					}
-
-					break;
 				}
 			}
 
-			if (!removed) {
-				loc.offset += delta;
-			}
+			loc.offset += delta;
 		}
 	}
 }

@@ -171,10 +171,11 @@ suite('LocationHistory', () => {
 
 		history.acceptDocumentChanges(uri, changes);
 
-		assert.strictEqual(2, history.locations.length);
-		assert.strictEqual(loc1, history.locations[0]);
-		assert.strictEqual(loc3, history.locations[1]);
-		assert.strictEqual(1, history.currentIndex);
+		assert.strictEqual(3, history.locations.length);
+		assert.strictEqual(15, history.locations[0].offset);
+		assert.strictEqual(33, history.locations[1].offset);
+		assert.strictEqual(1, history.locations[2].offset);
+		assert.strictEqual(2, history.currentIndex);
 	});
 });
 
