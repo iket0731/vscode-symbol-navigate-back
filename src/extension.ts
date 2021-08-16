@@ -6,55 +6,55 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(
 		vscode.commands.registerTextEditorCommand('symbol-navigate-back.revealDefinition', async (editor) => {
-			await core.navigate(editor, 'editor.action.revealDefinition');
+			await core.navigateToSymbol(editor, 'editor.action.revealDefinition');
 		})
 	);
 
 	context.subscriptions.push(
 		vscode.commands.registerTextEditorCommand('symbol-navigate-back.revealDefinitionAside', async (editor) => {
-			await core.navigate(editor, 'editor.action.revealDefinitionAside');
+			await core.navigateToSymbol(editor, 'editor.action.revealDefinitionAside');
 		})
 	);
 
 	context.subscriptions.push(
 		vscode.commands.registerTextEditorCommand('symbol-navigate-back.revealDeclaration', async (editor) => {
-			await core.navigate(editor, 'editor.action.revealDeclaration');
+			await core.navigateToSymbol(editor, 'editor.action.revealDeclaration');
 		})
 	);
 
 	context.subscriptions.push(
 		vscode.commands.registerTextEditorCommand('symbol-navigate-back.goToTypeDefinition', async (editor) => {
-			await core.navigate(editor, 'editor.action.goToTypeDefinition');
+			await core.navigateToSymbol(editor, 'editor.action.goToTypeDefinition');
 		})
 	);
 
 	context.subscriptions.push(
 		vscode.commands.registerTextEditorCommand('symbol-navigate-back.goToImplementation', async (editor) => {
-			await core.navigate(editor, 'editor.action.goToImplementation');
+			await core.navigateToSymbol(editor, 'editor.action.goToImplementation');
 		})
 	);
 
 	context.subscriptions.push(
 		vscode.commands.registerTextEditorCommand('symbol-navigate-back.goToReferences', async (editor) => {
-			await core.navigate(editor, 'editor.action.goToReferences');
+			await core.navigateToSymbol(editor, 'editor.action.goToReferences');
 		})
 	);
 
 	context.subscriptions.push(
 		vscode.commands.registerTextEditorCommand('symbol-navigate-back.showAllSymbols', async (editor) => {
-			await core.navigate(editor, 'workbench.action.showAllSymbols');
+			await core.navigateToSymbol(editor, 'workbench.action.showAllSymbols');
 		})
 	);
 
 	context.subscriptions.push(
-		vscode.commands.registerCommand('symbol-navigate-back.goBack', async () => {
-			await core.goBack();
+		vscode.commands.registerCommand('symbol-navigate-back.navigateBack', async () => {
+			await core.navigateBack();
 		})
 	);
 
 	context.subscriptions.push(
-		vscode.commands.registerCommand('symbol-navigate-back.goForward', async () => {
-			await core.goForward();
+		vscode.commands.registerCommand('symbol-navigate-back.navigateForward', async () => {
+			await core.navigateForward();
 		})
 	);
 
@@ -68,7 +68,7 @@ export function activate(context: vscode.ExtensionContext) {
 class ExtensionCore {
 	private _history = new LocationHistory();
 
-	public async navigate(editor: vscode.TextEditor, command: string) {
+	public async navigateToSymbol(editor: vscode.TextEditor, command: string) {
 		const loc = this._getCurrentLocation(editor);
 		if (!loc) {
 			return;
@@ -83,7 +83,7 @@ class ExtensionCore {
 		return new Location(editor.document.uri, offset, editor.viewColumn);
 	}
 
-	public async goBack() {
+	public async navigateBack() {
 		if (!this._history.goBack()) {
 			return;
 		}
@@ -96,7 +96,7 @@ class ExtensionCore {
 		await this._showInEditor(loc);
 	}
 
-	public async goForward() {
+	public async navigateForward() {
 		if (!this._history.goForward()) {
 			return;
 		}

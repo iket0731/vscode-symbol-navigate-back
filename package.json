@@ -30,8 +30,8 @@
     "onCommand:symbol-navigate-back.goToImplementation",
     "onCommand:symbol-navigate-back.goToReferences",
     "onCommand:symbol-navigate-back.showAllSymbols",
-    "onCommand:symbol-navigate-back.goBack",
-    "onCommand:symbol-navigate-back.goForward"
+    "onCommand:symbol-navigate-back.navigateBack",
+    "onCommand:symbol-navigate-back.navigateForward"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -65,11 +65,11 @@
         "title": "Symbol Navigate Back: Go to Symbol in Workspace..."
       },
       {
-        "command": "symbol-navigate-back.goBack",
+        "command": "symbol-navigate-back.navigateBack",
         "title": "Symbol Navigate Back: Go Back"
       },
       {
-        "command": "symbol-navigate-back.goForward",
+        "command": "symbol-navigate-back.navigateForward",
         "title": "Symbol Navigate Back: Go Forward"
       }
     ]
