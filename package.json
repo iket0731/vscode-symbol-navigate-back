@@ -1,14 +1,19 @@
 {
   "name": "symbol-navigate-back",
   "displayName": "Symbol Navigate Back",
-  "description": "",
+  "description": "Jump back from \"Go to Definition\", \"Go to Declaration\", \"Go to Implementation\", etc",
   "version": "0.0.1",
+  "publisher": "iket0731",
+  "author": {
+    "name": "iket0731"
+  },
   "engines": {
     "vscode": "^1.58.0"
   },
   "categories": [
     "Other"
   ],
+  "license": "MIT",
   "activationEvents": [
     "onCommand:symbol-navigate-back.revealDefinition",
     "onCommand:symbol-navigate-back.revealDefinitionAside",
