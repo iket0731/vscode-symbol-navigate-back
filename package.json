@@ -14,6 +14,14 @@
     "Other"
   ],
   "license": "MIT",
+  "homepage": "https://github.com/iket0731/vscode-symbol-navigate-back/blob/main/README.md",
+  "bugs": {
+    "url": "https://github.com/iket0731/vscode-symbol-navigate-back/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iket0731/vscode-symbol-navigate-back.git"
+  },
   "activationEvents": [
     "onCommand:symbol-navigate-back.revealDefinition",
     "onCommand:symbol-navigate-back.revealDefinitionAside",
