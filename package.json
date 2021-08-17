@@ -2,7 +2,7 @@
   "name": "symbol-navigate-back",
   "displayName": "Symbol Navigate Back",
   "description": "Jump back from \"Go to Definition\", \"Go to Declaration\", \"Go to Implementation\", etc",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "publisher": "iket0731",
   "author": {
     "name": "iket0731"
@@ -23,53 +23,53 @@
     "url": "https://github.com/iket0731/vscode-symbol-navigate-back.git"
   },
   "activationEvents": [
-    "onCommand:symbol-navigate-back.revealDefinition",
-    "onCommand:symbol-navigate-back.revealDefinitionAside",
-    "onCommand:symbol-navigate-back.revealDeclaration",
-    "onCommand:symbol-navigate-back.goToTypeDefinition",
-    "onCommand:symbol-navigate-back.goToImplementation",
-    "onCommand:symbol-navigate-back.goToReferences",
-    "onCommand:symbol-navigate-back.showAllSymbols",
-    "onCommand:symbol-navigate-back.navigateBack",
-    "onCommand:symbol-navigate-back.navigateForward"
+    "onCommand:symbolNavigateBack.revealDefinition",
+    "onCommand:symbolNavigateBack.revealDefinitionAside",
+    "onCommand:symbolNavigateBack.revealDeclaration",
+    "onCommand:symbolNavigateBack.goToTypeDefinition",
+    "onCommand:symbolNavigateBack.goToImplementation",
+    "onCommand:symbolNavigateBack.goToReferences",
+    "onCommand:symbolNavigateBack.showAllSymbols",
+    "onCommand:symbolNavigateBack.navigateBack",
+    "onCommand:symbolNavigateBack.navigateForward"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "symbol-navigate-back.revealDefinition",
+        "command": "symbolNavigateBack.revealDefinition",
         "title": "Symbol Navigate Back: Go to Definition"
       },
       {
-        "command": "symbol-navigate-back.revealDefinitionAside",
+        "command": "symbolNavigateBack.revealDefinitionAside",
         "title": "Symbol Navigate Back: Open Definition to the Side"
       },
       {
-        "command": "symbol-navigate-back.revealDeclaration",
+        "command": "symbolNavigateBack.revealDeclaration",
         "title": "Symbol Navigate Back: Go to Declaration"
       },
       {
-        "command": "symbol-navigate-back.goToTypeDefinition",
+        "command": "symbolNavigateBack.goToTypeDefinition",
         "title": "Symbol Navigate Back: Go to Type Definition"
       },
       {
-        "command": "symbol-navigate-back.goToImplementation",
+        "command": "symbolNavigateBack.goToImplementation",
         "title": "Symbol Navigate Back: Go to Implementations"
       },
       {
-        "command": "symbol-navigate-back.goToReferences",
+        "command": "symbolNavigateBack.goToReferences",
         "title": "Symbol Navigate Back: Go to References"
       },
       {
-        "command": "symbol-navigate-back.showAllSymbols",
+        "command": "symbolNavigateBack.showAllSymbols",
         "title": "Symbol Navigate Back: Go to Symbol in Workspace..."
       },
       {
-        "command": "symbol-navigate-back.navigateBack",
+        "command": "symbolNavigateBack.navigateBack",
         "title": "Symbol Navigate Back: Go Back"
       },
       {
-        "command": "symbol-navigate-back.navigateForward",
+        "command": "symbolNavigateBack.navigateForward",
         "title": "Symbol Navigate Back: Go Forward"
       }
     ]
