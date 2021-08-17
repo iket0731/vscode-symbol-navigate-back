@@ -83,9 +83,7 @@ class ExtensionCore {
 	}
 
 	public async navigateBack() {
-		if (!this._history.goBack()) {
-			return;
-		}
+		this._history.goBack();
 
 		const loc = this._history.current;
 		if (!loc) {
@@ -96,9 +94,7 @@ class ExtensionCore {
 	}
 
 	public async navigateForward() {
-		if (!this._history.goForward()) {
-			return;
-		}
+		this._history.goForward();
 
 		const loc = this._history.current;
 		if (!loc) {
