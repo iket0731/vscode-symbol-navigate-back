@@ -20,7 +20,7 @@ This extension contributes the following commands. Please assign keyboard shortc
 |`Symbol Navigate Back: Go to Declaration` |Save the current cursor position and call built-in `Go to Declaration`
 |`Symbol Navigate Back: Go to Type Definition` |Save the current cursor position and call built-in `Go to Type Definition`
 |`Symbol Navigate Back: Go to Implementations` |Save the current cursor position and call built-in `Go to Implementations`
-|`Symbol Navigate Back: Go to Go to References` |Save the current cursor position and call built-in `Go to Go to References`
+|`Symbol Navigate Back: Go to References` |Save the current cursor position and call built-in `Go to References`
 |`Symbol Navigate Back: Go to Symbol in Workspace...` |Save the current cursor position and call built-in `Go to Symbol in Workspace...`
 |`Symbol Navigate Back: Go Back` |Jump back to the previously saved cursor position|
 |`Symbol Navigate Back: Go Forward` |Jump forward to the next cursor position in this extension's stack|
