@@ -57,43 +57,91 @@ export class LocationHistory {
 	}
 
 	public acceptDocumentChanges(uri: vscode.Uri, changes: readonly vscode.TextDocumentContentChangeEvent[]) {
+		if (changes.length === 0) {
+			return;
+		}
+
 		for (const loc of this._locations) {
-			let delta = 0;
+			if (loc.uri.toString() !== uri.toString()) {
+				continue;
+			}
 
+			let posLine = loc.position.line;
+			let posChar = loc.position.character;
+
+			// Move the position to match the change.
 			for (const change of changes) {
-				if (loc.uri.toString() !== uri.toString()) {
-					continue;
-				}
+				const changeStart = change.range.start;
+				const changeEnd = change.range.end;
 
-				// Move the location to match the change.
-				if (loc.offset >= change.rangeOffset + change.rangeLength) {
-					delta += change.text.length - change.rangeLength;
-				} else if (loc.offset >= change.rangeOffset) {
-					if (loc.offset > change.rangeOffset + change.text.length) {
-						delta = change.rangeOffset + change.text.length - loc.offset;
+				const [lineBreakCount, lastLineTextLen] = this._readText(change.text);
+				const lastLineStartColumn = (lineBreakCount === 0 ? changeStart.character : 0);
+
+				if (posLine < changeStart.line || posLine === changeStart.line && posChar <= changeStart.character) {
+					// pos is before changeStart ... do nothing.
+				} else if (posLine > changeEnd.line || posLine === changeEnd.line && posChar >= changeEnd.character) {
+					// pos is after changeEnd ... shift pos to match the change.
+					posLine += changeStart.line + lineBreakCount - changeEnd.line;
+
+					if (posLine === changeEnd.line) {
+						posChar += lastLineStartColumn + lastLineTextLen - changeEnd.character;
+					}
+				} else {
+					// pos is between changeStart and changeEnd ... move pos to the end of new text if necessary
+					if (posLine >= changeStart.line + lineBreakCount) {
+						posLine = changeStart.line + lineBreakCount;
+						posChar = Math.min(posChar, lastLineStartColumn + lastLineTextLen);
 					}
 				}
 			}
 
-			loc.offset += delta;
+			loc.position = new vscode.Position(posLine, posChar);
 		}
+	}
+
+	private _readText(text: string): [number, number] {
+		let lineBreakCount = 0;
+		let lastLinePos = 0;
+
+		const CR = '\r'.charCodeAt(0);
+		const LF = '\n'.charCodeAt(0);
+
+		const textLen = text.length;
+		for (let i = 0; i < textLen; i++) {
+			const ch = text.charCodeAt(i);
+
+			if (ch === CR || ch === LF) {
+				lineBreakCount++;
+
+				// Skip LF of CR+LF.
+				if(ch === CR && i < textLen - 1 && text.charCodeAt(i + 1) === LF) {
+					i++;
+				}
+
+				lastLinePos = i + 1;
+			}
+		}
+
+		const lastLineLen = textLen - lastLinePos;
+
+		return [lineBreakCount, lastLineLen];
 	}
 }
 
 export class Location {
 	public uri: vscode.Uri;
-	public offset: number;
+	public position: vscode.Position;
 	public viewColumn: vscode.ViewColumn | undefined;
 
-	constructor(uri: vscode.Uri, offset: number, viewColumn: vscode.ViewColumn | undefined) {
+	constructor(uri: vscode.Uri, position: vscode.Position, viewColumn: vscode.ViewColumn | undefined) {
 		this.uri = uri;
-		this.offset = offset;
+		this.position = position;
 		this.viewColumn = viewColumn;
 	}
 
 	public equals(other: Location): boolean {
 		return (this.uri.toString() === other.uri.toString() &&
-			this.offset === other.offset &&
+			this.position.isEqual(other.position) &&
 			this.viewColumn === other.viewColumn) ? true : false;
 	}
 }
