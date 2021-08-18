@@ -25,7 +25,7 @@ This will allow you to go back directly with `Alt+[` (Mac: `Option+[`) to the or
 	"when": "editorHasDeclarationProvider && editorTextFocus && !isInEmbeddedEditor"
 },
 {
-	"key": "ctrl+k f12",
+	"key": "ctrl+shift+alt+f12",
 	"command": "symbolNavigateBack.goToTypeDefinition",
 	"when": "editorHasImplementationProvider && editorTextFocus && !isInEmbeddedEditor"
 },
