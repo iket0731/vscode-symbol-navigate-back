@@ -7,7 +7,7 @@ This extension provides alternative commands for symbol navigation commands such
 The alternative commands save the current cursor position (add it to the internal stack) and then call the original command to jump. You can return directly to the original position regardless of cursor movement or editing at the jump destination.
 
 ### About `Go Back`
-You can also the use built-in `Go Back` (default keymap: `Alt+Left` / `Ctrl+-`) to return to the original position. However, depending on cursor move operations at the jump destination (Searching, scrolling by `PageUp` / `PageDown`, etc), the cursor position will be added to the history, so you may need to `Go Back` many times.
+You can also use built-in `Go Back` (default keymap: `Alt+Left` / `Ctrl+-`) to return to the original position. However, depending on cursor move operations at the jump destination (Searching, scrolling by `PageUp` / `PageDown`, etc), the cursor position will be added to the history, so you may need to `Go Back` many times.
 
 ## How to Use
 Copy and paste the following settings into your `keybindings.json`. This settings overrides the default keymaps and adds a few keymaps. Change the key assignments as needed.
