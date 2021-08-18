@@ -1,18 +1,18 @@
 # Symbol Navigate Back
 
-### Jump back directly from "Go to Definition"
+### Jump back from "Go to Definition"
 
-This extension provides alternative commands for symbol navigation commands such as `Go to Definition` (default keymap: `F12`).
+This extension provides alternative commands for symbol navigation commands such as `Go to Definition (F12)`, `Go to Implementation (Ctrl+F12)` , and `Go to References (Shift+F12)`.
 
 The alternative commands save the current cursor position (add it to the internal stack) and then call the original command to jump. You can return directly to the original position regardless of cursor movement or editing at the jump destination.
 
-### About `Go Back`
+### About built-in "Go Back"
 You can also use built-in `Go Back` (default keymap: `Alt+Left` / `Ctrl+-`) to return to the original position. However, depending on cursor move operations at the jump destination (Searching, scrolling by `PageUp` / `PageDown`, etc), the cursor position will be added to the history, so you may need to `Go Back` many times.
 
 ## How to Use
 Copy and paste the following settings into your `keybindings.json`. This settings overrides the default keymaps and adds a few keymaps. Change the key assignments as needed.
 
-This will allow you to go back directly with `Alt+[` (Mac: `Option+[`) to the original position after jumping with symbol navigation commands (`Go to Definition (F12)`, `Go to References (Shift+F12)`, etc).
+This allows you to go back directly to the original position with `Alt+[` (macOS: `Option+[`) after jumping with symbol navigation commands (`Go to Definition (F12)`, `Go to Implementation (Ctrl+F12)`, etc).
 ``` json
 {
 	"key": "f12",
