@@ -16,7 +16,6 @@ This extension contributes the following commands. Please assign keyboard shortc
 |Command|Description|
 |---|---|
 |`Symbol Navigate Back: Go to Definition`|Save the current position, then call built-in `Go to Definition`|
-|`Symbol Navigate Back: Open Definition to the Side` |Save the current position, then call built-in `Open Definition to the Side`|
 |`Symbol Navigate Back: Go to Declaration` |Save the current position, then call built-in `Go to Declaration`|
 |`Symbol Navigate Back: Go to Type Definition` |Save the current position, then call built-in `Go to Type Definition`|
 |`Symbol Navigate Back: Go to Implementations` |Save the current position, then  call built-in `Go to Implementations`|

@@ -11,12 +11,6 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 
 	context.subscriptions.push(
-		vscode.commands.registerTextEditorCommand('symbolNavigateBack.revealDefinitionAside', async (editor) => {
-			await core.navigateToSymbol(editor, 'editor.action.revealDefinitionAside');
-		})
-	);
-
-	context.subscriptions.push(
 		vscode.commands.registerTextEditorCommand('symbolNavigateBack.revealDeclaration', async (editor) => {
 			await core.navigateToSymbol(editor, 'editor.action.revealDeclaration');
 		})

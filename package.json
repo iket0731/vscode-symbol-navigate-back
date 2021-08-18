@@ -24,7 +24,6 @@
   },
   "activationEvents": [
     "onCommand:symbolNavigateBack.revealDefinition",
-    "onCommand:symbolNavigateBack.revealDefinitionAside",
     "onCommand:symbolNavigateBack.revealDeclaration",
     "onCommand:symbolNavigateBack.goToTypeDefinition",
     "onCommand:symbolNavigateBack.goToImplementation",
@@ -40,11 +39,6 @@
       {
         "command": "symbolNavigateBack.revealDefinition",
         "title": "Symbol Navigate Back: Go to Definition",
-        "enablement": "editorHasDefinitionProvider"
-      },
-      {
-        "command": "symbolNavigateBack.revealDefinitionAside",
-        "title": "Symbol Navigate Back: Open Definition to the Side",
         "enablement": "editorHasDefinitionProvider"
       },
       {
