@@ -39,27 +39,33 @@
     "commands": [
       {
         "command": "symbolNavigateBack.revealDefinition",
-        "title": "Symbol Navigate Back: Go to Definition"
+        "title": "Symbol Navigate Back: Go to Definition",
+        "enablement": "editorHasDefinitionProvider"
       },
       {
         "command": "symbolNavigateBack.revealDefinitionAside",
-        "title": "Symbol Navigate Back: Open Definition to the Side"
+        "title": "Symbol Navigate Back: Open Definition to the Side",
+        "enablement": "editorHasDefinitionProvider"
       },
       {
         "command": "symbolNavigateBack.revealDeclaration",
-        "title": "Symbol Navigate Back: Go to Declaration"
+        "title": "Symbol Navigate Back: Go to Declaration",
+        "enablement": "editorHasDeclarationProvider"
       },
       {
         "command": "symbolNavigateBack.goToTypeDefinition",
-        "title": "Symbol Navigate Back: Go to Type Definition"
+        "title": "Symbol Navigate Back: Go to Type Definition",
+        "enablement": "editorHasTypeDefinitionProvider"
       },
       {
         "command": "symbolNavigateBack.goToImplementation",
-        "title": "Symbol Navigate Back: Go to Implementations"
+        "title": "Symbol Navigate Back: Go to Implementations",
+        "enablement": "editorHasImplementationProvider"
       },
       {
         "command": "symbolNavigateBack.goToReferences",
-        "title": "Symbol Navigate Back: Go to References"
+        "title": "Symbol Navigate Back: Go to References",
+        "enablement": "editorHasReferenceProvider"
       },
       {
         "command": "symbolNavigateBack.executeCommand",
