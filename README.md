@@ -51,7 +51,7 @@ This will allow you to go back directly with `Alt+[` (Mac: `Option+[`) to the or
 {
 	"key": "alt+]",
 	"command": "symbolNavigateBack.navigateForward"
-}
+},
 ```
 
 ## Features
