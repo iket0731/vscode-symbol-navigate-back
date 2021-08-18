@@ -41,8 +41,16 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 
 	context.subscriptions.push(
-		vscode.commands.registerTextEditorCommand('symbolNavigateBack.showAllSymbols', async (editor) => {
-			await core.navigateToSymbol(editor, 'workbench.action.showAllSymbols');
+		vscode.commands.registerTextEditorCommand('symbolNavigateBack.executeCommand', async (editor, edit, command, ...args) => {
+			if (command && typeof command === 'string') {
+				await core.navigateToSymbol(editor, command, args);
+			}
+		})
+	);
+
+	context.subscriptions.push(
+		vscode.commands.registerTextEditorCommand('symbolNavigateBack.saveCurrentPosition', async (editor) => {
+			await core.saveCurrentPosition(editor);
 		})
 	);
 
@@ -68,14 +76,19 @@ export function activate(context: vscode.ExtensionContext) {
 class ExtensionCore {
 	private _history = new LocationHistory();
 
-	public async navigateToSymbol(editor: vscode.TextEditor, command: string) {
+	public async navigateToSymbol(editor: vscode.TextEditor, command: string, ...args: any[]) {
+		this.saveCurrentPosition(editor);
+
+		await vscode.commands.executeCommand(command, args);
+	}
+
+	public async saveCurrentPosition(editor: vscode.TextEditor) {
 		const loc = this._getCurrentLocation(editor);
 		if (!loc) {
 			return;
 		}
 
 		this._history.add(loc);
-		await vscode.commands.executeCommand(command);
 	}
 
 	private _getCurrentLocation(editor: vscode.TextEditor) {

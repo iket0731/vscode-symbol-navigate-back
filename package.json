@@ -29,7 +29,8 @@
     "onCommand:symbolNavigateBack.goToTypeDefinition",
     "onCommand:symbolNavigateBack.goToImplementation",
     "onCommand:symbolNavigateBack.goToReferences",
-    "onCommand:symbolNavigateBack.showAllSymbols",
+    "onCommand:symbolNavigateBack.executeCommand",
+    "onCommand:symbolNavigateBack.saveCurrentPosition",
     "onCommand:symbolNavigateBack.navigateBack",
     "onCommand:symbolNavigateBack.navigateForward"
   ],
@@ -61,8 +62,12 @@
         "title": "Symbol Navigate Back: Go to References"
       },
       {
-        "command": "symbolNavigateBack.showAllSymbols",
-        "title": "Symbol Navigate Back: Go to Symbol in Workspace..."
+        "command": "symbolNavigateBack.executeCommand",
+        "title": "Symbol Navigate Back: Execute Command"
+      },
+      {
+        "command": "symbolNavigateBack.saveCurrentPosition",
+        "title": "Symbol Navigate Back: Save Current Position"
       },
       {
         "command": "symbolNavigateBack.navigateBack",
