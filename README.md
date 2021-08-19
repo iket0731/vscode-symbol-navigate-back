@@ -10,7 +10,7 @@ The alternative commands save the current cursor position (add it to the interna
 You can also use built-in `Go Back` (default keymap: `Alt+Left` / `Ctrl+-`) to return to the original position. However, depending on cursor move operations at the jump destination (Searching, scrolling by `PageUp` / `PageDown`, etc), the cursor position will be added to the history, so you may need to `Go Back` many times.
 
 ## How to Use
-Copy and paste the following settings into your `keybindings.json`. This settings overrides the default keymaps and adds a few keymaps. Change the key assignments as needed.
+Copy and paste the following settings into your `keybindings.json`. These settings override default keymaps, and add keymaps for commands which have no default keymaps. Change the key assignments as needed.
 
 This allows you to go back directly to the original position with `Alt+[` (macOS: `Option+[`) after jumping with symbol navigation commands (`Go to Definition (F12)`, `Go to Implementation (Ctrl+F12)`, etc).
 ``` json
