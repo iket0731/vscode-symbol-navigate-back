@@ -1,13 +1,13 @@
 # Symbol Navigate Back
 
-### Jump back from "Go to Definition"
+### Jump back from "Go to Definition" (F12)
 
 This extension provides alternative commands for symbol navigation commands such as `Go to Definition (F12)`, `Go to Implementation (Ctrl+F12)` , and `Go to References (Shift+F12)`.
 
 The alternative commands save the current cursor position (add it to the internal stack) and then call the original command to jump. You can return directly to the original position regardless of cursor movement or editing at the jump destination.
 
 ### About built-in "Go Back"
-You can also use built-in `Go Back` (default keymap: `Alt+Left` / `Ctrl+-`) to return to the original position. However, depending on cursor move operations at the jump destination (Searching, scrolling by `PageUp` / `PageDown`, etc), the cursor position will be added to the history, so you may need to `Go Back` many times.
+You can also use VSCode built-in `Go Back` command (default keymap: `Alt+Left` / `Ctrl+-`) to return to the original position. However, depending on cursor move operations at the jump destination (Searching, scrolling by `PageUp` / `PageDown`, etc), the cursor position will be added to the history, so you may need to `Go Back` many times.
 
 ## How to Use
 Copy and paste the following settings into your `keybindings.json`. These settings override default keymaps, and add keymaps for commands which have no default keymaps. Change the key assignments as needed.
