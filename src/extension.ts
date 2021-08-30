@@ -90,6 +90,15 @@ class ExtensionCore {
 	}
 
 	public async navigateBack() {
+		// Add current position to the history if there is no entry for navigateFoward.
+		if (!this._history.current) {
+			const editor = vscode.window.activeTextEditor;
+			if (editor) {
+				this._history.add(this._getCurrentLocation(editor));
+				this._history.goBack();
+			}
+		}
+
 		this._history.goBack();
 
 		const loc = this._history.current;
