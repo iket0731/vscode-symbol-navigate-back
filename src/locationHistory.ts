@@ -32,7 +32,7 @@ export class LocationHistory {
 	}
 
 	public goForward(): boolean {
-		if (this._currentIndex >= this._locations.length - 1) {
+		if (this._currentIndex >= this._locations.length) {
 			return false;
 		}
 

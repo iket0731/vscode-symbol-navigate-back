@@ -69,6 +69,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 class ExtensionCore {
 	private _history = new LocationHistory();
+	private _topLocation: Location | undefined = undefined;
 
 	public async navigateToSymbol(editor: vscode.TextEditor, command: string, ...args: any[]) {
 		this.saveCurrentPosition(editor);
@@ -82,6 +83,7 @@ class ExtensionCore {
 			return;
 		}
 
+		this._topLocation = undefined;
 		this._history.add(loc);
 	}
 
@@ -90,12 +92,11 @@ class ExtensionCore {
 	}
 
 	public async navigateBack() {
-		// Add current position to the history if there is no entry for navigateFoward.
+		// Save the current location as _topLocation if we are at the top of the history.
 		if (!this._history.current) {
 			const editor = vscode.window.activeTextEditor;
 			if (editor) {
-				this._history.add(this._getCurrentLocation(editor));
-				this._history.goBack();
+				this._topLocation = this._getCurrentLocation(editor);
 			}
 		}
 
@@ -112,9 +113,16 @@ class ExtensionCore {
 	public async navigateForward() {
 		this._history.goForward();
 
-		const loc = this._history.current;
+		let loc = this._history.current;
+
 		if (!loc) {
-			return;
+			// Navigate to _topLocation if saved.
+			if (this._topLocation) {
+				loc = this._topLocation;
+				this._topLocation = undefined;
+			} else {
+				return;
+			}
 		}
 
 		await this._showInEditor(loc);

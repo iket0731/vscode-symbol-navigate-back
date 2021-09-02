@@ -81,8 +81,12 @@ suite('LocationHistory - add, goBack, goForward', () => {
 		assert.strictEqual(history.current, loc3);
 
 		ret = history.goForward();
+		assert.strictEqual(ret, true);
+		assert.strictEqual(history.current, undefined);
+
+		ret = history.goForward();
 		assert.strictEqual(ret, false);
-		assert.strictEqual(history.current, loc3);
+		assert.strictEqual(history.current, undefined);
 	});
 
 	test('combination case 1', () => {
