@@ -6,6 +6,12 @@ This extension provides alternative commands for symbol navigation commands such
 
 The alternative commands save the current cursor position (add it to the internal stack) and then call the original command to jump. You can return directly to the original position regardless of cursor movement or editing at the jump destination.
 
+<p align=center>
+<img src="media/example.gif" width=75%>
+<br/>
+<em>Example: Go to definition (F12), PageDown several times, and then go back</em>
+</p>
+
 ### About built-in "Go Back"
 You can also use VSCode built-in `Go Back` command (default keymap: `Alt+Left` / `Ctrl+-`) to return to the original position. However, depending on cursor move operations at the jump destination (Searching, scrolling by `PageUp` / `PageDown`, etc), the cursor position will be added to the history, so you may need to `Go Back` many times.
 
@@ -43,7 +49,7 @@ This allows you to go back directly to the original position with `Alt+[` (macOS
 	"key": "ctrl+t",
 	"command": "symbolNavigateBack.executeCommand",
 	"args": "workbench.action.showAllSymbols"
-}
+},
 {
 	"key": "alt+[",
 	"command": "symbolNavigateBack.navigateBack"
@@ -65,8 +71,3 @@ This extension contributes the following commands. You need to remap default key
 - `Symbol Navigate Back: Save Current Position`  - Save the current position only, do nothing more
 - `Symbol Navigate Back: Go Back`  - Jump back to the previously saved position
 - `Symbol Navigate Back: Go Forward`  - Jump forward to the next position in this extension's stack
-
-## Usage Example
-Go to definition, PageDown several times, and then go back:
-![Go to definition, PageDown several times, and then go back](symbol-navigate-back.gif)
-
