@@ -1,8 +1,8 @@
 {
   "name": "symbol-navigate-back",
-  "displayName": "Symbol Navigate Back",
-  "description": "Jump back from \"Go to Definition\" (F12), \"Go to Implementation\" (Ctrl+F12), \"Go to References\" (Shift+F12), etc",
-  "version": "1.1.12",
+  "displayName": "Symbol Navigate Back - Go to Definition History",
+  "description": "Back from \"Go to Definition\" (F12), \"Go to Implementation\" (Ctrl+F12), \"Go to References\" (Shift+F12), etc",
+  "version": "1.1.13",
   "publisher": "iket0731",
   "author": {
     "name": "iket0731"
@@ -16,11 +16,11 @@
     "Other"
   ],
   "keywords": [
-    "goto",
+    "go",
+    "to",
     "definition",
-    "F12",
-    "jump",
-    "back"
+    "Go to Definition",
+    "F12"
   ],
   "license": "MIT",
   "homepage": "https://github.com/iket0731/vscode-symbol-navigate-back/blob/main/README.md",
